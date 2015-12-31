@@ -41,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">God Watching</a>
+          <a class="navbar-brand" href="#">Evangelos</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -58,19 +58,19 @@
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>God Watching</h1>
-        
+        <h1>Mark 16:15</h1>
+		<p>And He said to them, ‘Go into all the world and preach the gospel to every creature.</p>
         <p>How often do you share God's message on your social media accounts?  This app will download the last 6 months of Facebook data and count how many times you use words related to Christianity. It will then highlight those words in your feed.  See how many words you can rack up as you share God's message with those around you.</p>
       </div>
 
 
-<img src="cross.png" class="img-responsive" alt="Cinque Terre">
+
 
 
 
 
 <script>
-var wordlist = new Array("Advent", "Amen", "Anointing", "Apostle", "Ascension", "Atonement", "Baptism", "Blood of Christ", "Body of Christ", "Born Again", "Bible", "Christ", "Christian", "Covenant", "Creed", "Crucifixion", "Devotional", "Easter", "Eternal Life", "Eucharist", "Evangelical", "Faith", "God", "Golden Rule", "Gospel", "Grace", "Hell", "Holy Spirit", "Hosanna", "Incarnation", "Jehova", "Jerusalem", "Last Supper", "Laying on of hands", "Lord's Prayer", "Messiah", "New Covenant","New Testament", "Old Testament", "Passover", "Pentecost", "Rapture", "Redemption", "Redeemed", "Sabbath", "Sacrament", "Peter", "Mark", "Mathew", "Luke", "John", "Salvation", "Sermon", "Church", "Sin ", "Son of God", "Son of Man", "Ten Commandments", "Trinity", "Yahweh", "urbana", "IV", "intervarsity");
+var wordlist = new Array("Advent", "Amen", "Anointing", "Apostle", "Ascension", "Atonement", "Baptism", "Blood of Christ", "Body of Christ", "Born Again", "Bible", "Christ", "Christian", "Covenant", "Creed", "Crucifixion", "Devotional", "Easter", "Eternal Life", "Eucharist", "Evangelical", "Faith", "God", "Golden Rule", "Gospel", "Grace", "Hell", "Holy Spirit", "Hosanna", "Incarnation", "Jehova", "Jerusalem", "Last Supper", "Laying on of hands", "Lord's Prayer", "Messiah", "New Covenant","New Testament", "Old Testament", "Passover", "Pentecost", "Rapture", "Redemption", "Redeemed", "Sabbath", "Sacrament", "Peter", "Mark", "Mathew", "Luke", "John", "Salvation", "Sermon", "Church", "Sin ", "Son of God", "Son of Man", "Ten Commandments", "Trinity", "Yahweh", "urbana", "IV ", "intervarsity", "bless", "mission", "preach", "praise", "spirit", "worship", "greatful");
 
 function sortByCount(a, colIndex){
 
@@ -177,14 +177,27 @@ function showRawFacebook(){
 		$("#topFiveList").append("<li>" + sortedFacebook[i].message + "</li>");
 		i++;
 	} while (i < 5);
+	if(challengeComplete > 0){
+		$("#challengeBox").empty();
+		$("#challengebox").append("Challenge Complete!");
+	}
+	
 	highlightFacebook();
 }
 
+
+
+var challengeComplete = 0;
 function countwords(string){
 	var count = 0;
 	$.each(wordlist, function(k,v){
 		//console.log("word to seach is " + v);
 		count += countOcurrences(string, v);
+		var tempchallenge = countOcurrences("God's Justice", v);
+		if (tempchallenge > 0){
+			console.log(tempchallenge);
+			challengeComplete = 1;
+		}
 	});
 	
 	
@@ -236,6 +249,22 @@ function getLikes(response){
  <div id="topFive">
  	<ul id="topFiveList"></ul>
  </div>
+ 
+ 
+ 
+ 
+   <div class="page-header">
+        <h1>Daily Challenge</h1>
+ </div>
+ <div class="row">
+  <div class="col-sm-9"><h3>Use the phrase "God's Justice" in a post</h3></div>
+  <div class="col-sm-3"><h1 ><span class="label label-primary" id="challengebox" ></span></h1></div>
+</div>
+ 
+ <div>
+ 
+ 	
+ </div>
  <div class="page-header">
         <h1>Facebook Feed</h1>
  </div>
@@ -257,6 +286,12 @@ function getLikes(response){
 	<p>Find a bug?  Have a suggestion?  Please <a href="mailto:enterinlast?Subject=GodWatching" target="_top">email the creaters here.</a></p>
 </div>
 
+ <div class="page-header">
+        <h1>About</h1>
+ </div>
+<div class="well well-lg" id="about">
+	<p>This app was created as part of the #Hack4Missions hackathon at Urbana 2015. Find out more about this event at <a href="http://hack4missions.org/">hack4missions.org/</a></p>
+</div>
     </div> <!-- /container -->
 </body>
 </html>
